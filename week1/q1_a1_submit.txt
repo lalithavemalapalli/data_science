@@ -1,0 +1,251 @@
+### Assignment 1: 
+**Task**:
+**Objective**: Understand Python’s core syntax and how it handles tasks like string manipulation and lists.
+
+ 1. Write a Python script that:
+   - Takes a string input from the user and converts it to a list of words.
+          ans: s1=input("enter the string:")
+               print(s1)
+               print("the list of words in the inputed string are:",list(s1))
+   - Reverse the order of the words without using any built-in methods that directly reverse the list.
+           ans: words: s1="Lalitha v"
+                       s1=[::-1]
+                           output: 'v ahtilal'
+                list: l1=[1,2,3,4,5]
+                      l1=[::-1]
+                           output: [5,4,3,2,1]
+    - Replace any word that has an odd number of characters with the word “oddword”.
+            ans: word = ["lalitha","swathi","anjali","sunitha","shravani","venkatesh"]
+                 modified_words=['oddword' if len(word)%2!=0 else word for word in words]
+                modified_words
+                     output: ['oddword','swathi','anjali','oddword','shravani','oddword']
+2. **Question**: Explain how Python handles string slicing and list operations. How does this affect how you approached reversing the list?
+    ans: string slicing : the python do many operations with strings in that the string slicing is one of that.
+                          where this slicing operation returns the slice from the string . 
+                          this slicing does not affect the original string but this returns the slice of that string .
+                    example: val="Lalitha"
+                             print(val[0:3])
+                          Python also supports the negative indexing , where -1 represents the last element .
+         list operations : python supports different list operations: 
+                             1. accessing the list : we can access the list elements by using index values.
+                                 ex: l1=[1,2,3,4,5]
+                                      print(l1[0:2])
+                             2. adding an element to the list: 
+                                 * using append() method: this append() method is used to add the element at the end of the list .
+                                     l1=[1,2,3,4,5]
+                                     print(l1.append(6))
+                                 * using insert() method: this insert() method is used to add the element at the specified position in the list.
+                                     l1=[1,2,3,4,5]
+                                     print(l1.insert(2,10))
+                             3. deleting an element from the list:
+                                  * using pop() method: this pop() method is used to remove the element from the list . it delets the last element from the list.
+                                      l1=[1,2,3,4,5]
+                                      print(l1.pop())
+                                  * using remove() method: this remove() method is used to remove the specific element from the list .
+                                      l1=[1,2,3,4]
+                                      print(l1.remove(3))
+                             4. concatinating the list : 
+                                   we can concatinate the two lists in python using the + operator .
+                                     l1=[1,2,3,4,5]
+                                      l2=[6,7,8]
+                                      n1=l1+l2
+                                      print(n1)
+             In python it supports the negative indexing . in python we use two methods to reverse the list , one is by using the python built-in function reverse() and another one is using the indexing .
+             ex: l1=[1,2,3,4,5]
+                 print(l1[::-1])
+                   output: [5,4,3,2,1]       
+                       
+------
+    ### Assignment 2:*Interactive Computing with IPython**
+    **Objective**: Learn how to use IPython to analyze and compare code performance.
+
+    **Task**:
+    1.Use the `%timeit` magic command in IPython to compare the performance of the following methods to create a list of numbers from 1 to 1 million:
+   - A `for` loop.
+        ans: def create_list():
+                st=[]
+                for i in range(1,1000001):
+                    lst.append(i)
+               return i
+           %timeit create_list
+                   output: 13.8 ns ± 0.0178 ns per loop (mean ± std. dev. of 7 runs, 100,000,000 loops each)
+   - List comprehension.
+        ans: %timeit [i for i in range(1, 1000001)]
+               output: 22.5 ms ± 637 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+   - The `range()` function.
+        ans: %timeit list(range(1,1000001))
+                output: 13.1 ms ± 95.7 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+
+
+    2. **Deliverable**:  Write a short explanation of which method performed the fastest and why. Discuss how Python’s dynamic typing impacts performance in this context.
+        ans: firstly we use the for loop to create the list if numbers from 1 to 1 million - in this the for loop takes 7 runs and 100,000,000 loop each ,
+       the average time taken to run the loop using for loop is 13.8 ns per each run it performed 1000,000,000 loops per run and the total runs taken to create the list is 7.
+    secondly we take the list comprehension (this is the simplest way or creating the lists in python )- this also takes 7 runs and 10 loops each ,
+       the average time taken to run the loop using the list comprehension is 22.5 ms per each run it performed 10 loops per each run and the total runs taken to create the list is 7 runs .
+    at last we take range() function to create the list - this takes 7 runs and 100 loops each ,
+       the average time taken to run the loop is 13.1 ms per each run it performed 100 loops per each run and the total runs taken by the range() function to create the list is 7 runs .
+
+--------       
+
+       ### Assignment 3: **Exploring Jupyter Notebook Features**
+**Objective**: Use Jupyter Notebooks to combine code, text, and visualizations in one place.
+
+**Task**:
+1. Create a Jupyter Notebook that:
+      ans: first go to the jupyter notebook and create a new python file 
+   - Imports data from a CSV file into a pandas DataFrame.
+        ans: to import csv file into pandas data frame firstly we need to import the pandas into the jupyter nootbook 
+               import pndas as pd 
+             next we need to import data from csv file into the pandas data frame using the read_csv command 
+                 df=pd.read_csv("data.csv")
+   - Uses Markdown cells to provide a description of the dataset.
+        ans: to use the markdown cell first we need to create the new markdown cell in the jupyter file 
+              1. click on the + symbol on the tool bar to create the new file 
+              2. save that file with a .md extension to create the markdown file .
+              3. then start typing the description of the data set in that markdown file which you have created
+   - Plots a simple graph of one or more columns using matplotlib.
+        ans: to plot a simple graph on the jupyter notebook first we need to import the matplotlib library 
+              import matplotlib.pyplot as plt
+            now let us plot a simple graph using the first two columns in the data frames 
+               p1=plt.plot(df['column1'],df['column2'])
+            if we need to add the ladel to the graph the 
+            p1=plt.plot(df['column1],df['column2'])
+            plt.xlabel("column1")
+            plt.ylabel("column2")
+
+2. **Bonus**: In a Markdown cell, write a math formula using LaTeX to show how to calculate the mean of a dataset’s numerical column. Explain how to manually calculate the mean in Python.
+            
+            ans: a math formula using LaTeX to show how to calculate the mean of a datasets numerical column:
+                   μ= 1/n(sum of xi)
+                where , μ represents the mean 
+                        n is the total number of vcalues in the list 
+                        and xi represents the each value in the list 
+                To manually calculate the mean in python i : we can able to calculate the mean manually in python using the basic functions in python sum() and len().
+                     data=[10,20,30,40,50]
+                     mean=sum(data)/len(data)
+                     print("mean value of the given data is:",mean)
+                here , sum(data) represents the total sum of the values in the list.
+                       len(data) represents the len of the list .
+
+--------
+  ### Assignment 4: **Debugging with IPython**
+**Objective**: Get comfortable debugging Python code using IPython's debugging features.
+           ​	
+ 1. Write a Python function that:
+   - Takes a list of numbers and returns the sum of the squares of all the even numbers.
+      numbers=[1,2,3,4,5,6,7,8,9]
+      def sum_of_square_of_num(numbers):
+           for num in numbers: 
+               if num%2==0:
+                  total += num**2
+           return total
+        numbers=[10,20,30,40,50]
+        result=sum_of_square_of_num(numbers)
+        print("squares of the given numbers are:",result)
+
+   - Deliberately introduce an error in the code (e.g., use an undefined variable).
+        def sum_of_square_of_num(numbers):
+           for num in numbers: 
+               if num%2==0:
+                  total += num**2
+           return total + var1
+        numbers=[10,20,30,40,50]
+        result=sum_of_square_of_num(numbers)
+        print("squares of the given numbers are:",result)
+      in the above program there is an error that is we didn't declared the  var1 when we run this program we will get the error that is undefined error
+
+2. Use IPython’s `%debug` command to identify the error in your function. Submit a notebook that includes:
+   - The original buggy code.
+       ans: def sum_of_square_of_num(numbers):
+           for num in numbers: 
+               if num%2==0:
+                  total += num**2
+           return total 
+        result=sum_of_square_of_num(numbers)
+        print("squares of the given numbers are:",result)
+   - The `%debug` output showing how you found the error.
+      this %debug command is used to find the error in the code in python now in the above program there is an error to find out that we use this %debug command and we found that there is an NAME ERROR in the code ,
+      that is numbers is not defined .
+         NameError : name 'numbers' is not defined 
+   - The corrected code with an explanation of the fix.
+       def sum_of_square_of_num(numbers):
+           for num in numbers: 
+               if num%2==0:
+                  total += num**2
+           return total 
+        numbers=[10,20,30,40,50]
+        result=sum_of_square_of_num(numbers)
+        print("squares of the given numbers are:",result)
+        here there is an error that is numbers is not defined , now i fixed a code by declaring a numbers and passing a value .
+------
+### Assignment 5: **Magic Functions and Automation in IPython**
+**Objective**: Learn how to use IPython’s magic commands to optimize tasks.
+
+**Task**:
+1. Use `%run`, `%time`, and `%store` magic commands to:
+   - Read a list of integers from a file.
+      ans: first we need to create a file that contains the list of integers .
+           file name is numbers.txt
+           now the prgram dile is saved as read_l1.py.
+                def read_integers(numbers):
+                    with open(numbers, 'r') as file:
+                       return [int(line.strip()) for line in file]
+                numbers = read_integers('numbers.txt')
+                print("Original list:", numbers)
+            here the above program is to read the list of numbers from the file , the read_integers is a function name and the line_strip() is used in the above program to remove the whitespaces in the file .
+        using %run command :
+              %run read_l1.py
+            the %run command run the read_l1.py file and print the list of numbers.
+    -Time how long it takes to sort the list.
+        ans: we use %time command to check how much time it takes to sort the list of elements . to sort the numbers we use the sorted() function in python ,the program will be 
+              %time sort_num = sorted(numbers)
+                 output: the cpu takes 4 microseconds and the total time taken is that is combination of cpu time and system time that is 5 microseconds 
+                          wall time is the clock time it takes is 5.96 microseconds.
+    -Store the sorted list and reuse it in a later session . 
+        ans: we use the %store command to store the sorted list and we are able to use that stored list in the later programs also .
+                %store sort_num       
+                    output: Stored 'sort_num' (list)
+
+2. **Discussion**: Explain how `%store` can be useful in real-world data analysis workflows.
+      In python the %store command is used to store the values . in data analysis also the %store is used to store the analyzed data .
+      in data analytics again and again we need to read the data and visualize the data it will be very difficult to save the data again and again by creating the documents,
+      but it is easy to save the visualised and analysed data using the %store command in python.
+
+------
+### Assignment 6: **Customizing the IPython Environment**
+**Objective**: Optimize your IPython setup for better productivity.
+
+**Task**:
+1. Customize your IPython startup configuration file (`ipython_config.py`) to:
+     ans: To create the configuration file run the following command on the terminal .
+          command : ipython profile create 
+   - Automatically import commonly used libraries (e.g., numpy, pandas).
+       ans: to import commonly used libraries automatically you need to run the code .
+             code: c = get_config()  # Get the IPython config object
+                   c.InteractiveShellApp.exec_lines = [
+                                     'import numpy as np',
+                                     'import pandas as pd',
+                                     'import matplotlib.pyplot as plt',
+                                     'plt.style.use("ggplot")'
+                                    ]
+            In the above code c means the configuration of the get_config() method and ,
+            The InteractiveShellApp includes what should be run when the IPython session starts , and it is a list of python code that is executed automatically when the shell is started,
+            The .exec_lines represents  when we start the python shell it will execute the code in the list automatically .
+   - Set a default plotting style using matplotlib. 
+        ans: to set a default plotting style using matypplotlib we use this command :
+               c.InteractiveShellApp.exec_lines.append("plt.style.use('ggplot')")
+            here , .exec_lines.append() method add the element at the end of the code .
+            and plt.style.use is used to set the style for the plotting 
+            and the 'ggplot' is a style which is commaonly used to plot the graph .
+2. **Reflection**: How does configuring an environment like IPython save time or reduce errors for data analysts? Describe a situation where this customization would be helpful.
+     ans: configuring an environment like IPython saves time and reduce errors for data analytics.
+           * in data analytics we always do the analysis and visualization with the same libraries like pandas, numpy and matplotlib by configuring
+              it helps yo reduce the small small errors and when the errors are reduced it automatically reduces the time , it helps in saving the time for the analyst .
+        A Situation :
+           for example , a girl name is shravya , she goes on working with the visualization and analytical tools she analyse the customer data ,
+           she creates the reports every week .
+              in this situation if by chance she forget how to import the libraries then she faces many errors in importing and it consumes lot of time ,
+              soo in this case when we use the configuration this helps in time saving and error reductiona because when we open the IPython shell 
+              it automatically imports all the basic libraries which ever we provided .
+
+
