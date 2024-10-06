@@ -1,0 +1,48 @@
+name: Convert Notebooks to Python
+
+on:
+  push:
+    paths:
+      - '**/*.ipynb'
+
+jobs:
+  convert_notebooks:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      # Install nbconvert to convert .ipynb files to .py
+      - name: Install nbconvert
+        run: |
+          pip install nbconvert
+
+      # Find and convert .ipynb files to .py
+      - name: Convert notebooks to Python scripts
+        run: |
+          for notebook in $(git diff --name-only HEAD^ HEAD | grep '.ipynb'); do
+            jupyter nbconvert --to script "$notebook"
+          done
+
+      # Configure Git user
+      - name: Set up Git
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+
+      # Commit the converted Python files
+      - name: Commit changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git add *.py
+            git commit -m "Exported .ipynb files to .py"
+            git push
+          fi
