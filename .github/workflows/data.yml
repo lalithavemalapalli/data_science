@@ -1,0 +1,48 @@
+name: "Check for Data Files on Commit"
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  data-file-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: List committed files for push events
+        id: file_list
+        run: |
+          # If this is a push event, list all files that are committed
+          if [ "$GITHUB_EVENT_NAME" == "push" ]; then
+            # List files changed in this push using git diff between the latest commit and its parent.
+            git diff --name-only ${{ github.sha }} ${{ github.event.before }} > files.txt
+          else
+            # For PRs, list the changed files
+            git diff --name-only HEAD origin/${{ github.base_ref }} > files.txt
+          fi
+          echo "Files changed:"
+          cat files.txt
+          echo "::set-output name=files::$(cat files.txt)"
+
+      - name: Check for data files
+        run: |
+          # Define your forbidden patterns.
+          # This example forbids any files in a "data/" folder or files with extensions like .csv or .jsonl (you can add others as needed)
+          forbidden_patterns=("data/" "*.csv" "*.jsonl" ".txt" ".tsv")
+          failed=0
+          while IFS= read -r file; do
+            for pattern in "${forbidden_patterns[@]}"; do
+              if [[ "$file" == $pattern || "$file" == */${pattern#*/} ]]; then
+                echo "Error: Found forbidden file: $file (matches pattern: $pattern)"
+                failed=1
+              fi
+            done
+          done < files.txt
+          if [ $failed -eq 1 ]; then
+            echo "Commit contains data files. Aborting."
+            exit 1
+          else
+            echo "No forbidden data files found."
+          fi
