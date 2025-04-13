@@ -12,12 +12,16 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
+          
       - name: List changed files
         id: file_list
         run: |
           echo "Event Name: $GITHUB_EVENT_NAME"
           if [ "$GITHUB_EVENT_NAME" = "push" ]; then
+            if [ -z "$GITHUB_EVENT_BEFORE" ]; then
+              echo "No previous commit found. Using empty tree SHA for comparison."
+              GITHUB_EVENT_BEFORE="4b825dc642cb6eb9a060e54bf8d69288fbee4904"
+            fi
             echo "Comparing commit $GITHUB_EVENT_BEFORE with $GITHUB_SHA"
             git diff --name-only "$GITHUB_EVENT_BEFORE" "$GITHUB_SHA" > files.txt
           else
