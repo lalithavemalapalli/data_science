@@ -119,9 +119,9 @@ You don't need to be a data scientist to follow along. If you've ever wondered h
 
 | Model | Accuracy | ROC-AUC |
 |-------|----------|---------|
-| Logistic Regression | — | — |
-| Random Forest | — | — |
-| Decision Tree | — | — |
+| Logistic Regression | 0.5486  |
+| Random Forest | 0.7129 |
+| Decision Tree | 0.5829|
 
 *Results to be updated after completing ml_analysis.ipynb*
 
