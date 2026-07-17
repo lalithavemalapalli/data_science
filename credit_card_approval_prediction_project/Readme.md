@@ -1,4 +1,4 @@
-# 💳 Credit Card Approval Prediction
+# 💳 Creditworthiness Prediction Using Applicant and Historical Credit Data
 ### *A Data-Driven Story of Trust, Risk, and Financial Inclusion*
 
 ---
@@ -13,9 +13,7 @@ Behind the scenes, banks must answer a much harder question:
 
 - *"Can we trust this person to pay us back?"*
 
-For decades, this decision was made by loan officers relying on gut instinct, limited paperwork, and unconscious biases. Today, data science gives us a better way — one that is faster, fairer, and more consistent.
-
-This project tells the story of how we use **real-world applicant data** to build a machine learning model that predicts whether a credit card application should be **approved or rejected** — based not on gut feeling, but on patterns learned from thousands of past customers.
+This project tells the story of how we use **real-world applicant data and their credit history data** to build a machine learning model that predicts whether a credit card application should be **approved or rejected** — based not on gut feeling, but on patterns learned from thousands of past customers.
 
 ---
 
@@ -26,7 +24,26 @@ We work with two datasets provided by a financial institution:
 | File | Description | Rows |
 |------|-------------|------|
 | `application_record.csv` | Personal & financial details of applicants | 4,38,557 |
-| `credit_record.csv` | Monthly credit behavior of existing customers | 10,48,575 |
+| `credit_record.csv` | Monthly credit behavior of existing customers | 10,48,575 | 
+ 
+But the common applicants in both the files are:
+
+| File | Description | Rows |
+|------|-------------|------|
+| `application_record.csv` | Personal ands financial details of the applicants | 4,38,510 unique IDs |
+| `credit_record.csv` | Monthly credit behaviour of existing customers | 36,457 unique IDs |
+
+After Inner Join:
+
+`application_record.csv ` 
+438,510 unique applicants
+          │
+          │
+          │ Inner Join on ID = 36457 applicants retained
+          ▼
+`credit_record.csv `
+36,457 unique customers
+
 
 These two datasets are the **raw ingredients** of our story. Together, they tell us not just who the applicants are — but how they *behave* with credit.
 
