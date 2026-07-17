@@ -3,7 +3,7 @@
 
 ---
 
-## 📖 The Story Behind This Project
+## 📖 The Story Behind This Project is
 
 Every day, thousands of people walk into a bank or open an app and ask a simple question:
 
